@@ -28,6 +28,9 @@ class ApiClient {
       const url = new URL(route, this.baseURL);
       const response = await fetch(url, {
         method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: formData
       });
       if (!response.ok) {
@@ -48,11 +51,3 @@ class ApiClient {
       return response.json();
     }
   }
-  
-// Example usage:
-const api = new ApiClient('http://localhost:8000');
-
-// GET request example
-//api.get('/api/hello') // Requesting '/api/hello'
- // .then(data => console.log(data))
- // .catch(error => console.error(error));

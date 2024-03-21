@@ -13,7 +13,7 @@ userRoute.post("/register", async (req, res) => {
     const { name, email, password } = user;
 
     const isEmailAlreadyExist = await UserRepository.findOne({ email });
-
+  
     if (isEmailAlreadyExist) {
       return res.status(400).json({
         status: 400,
@@ -81,7 +81,8 @@ userRoute.post("/login", async (req, res) => {
       success: true,
       message: "Login success",
       token: token,
-      user: user
+      user: user,
+      sess: session
     });
   } catch (error: any) {
     console.error(error);
@@ -92,26 +93,20 @@ userRoute.post("/login", async (req, res) => {
   }
 });
 
-userRoute.post("/user", async (req, res) => {
-  try {
-    const session = req.session as CustomSession;
-    if (session && session.username) {
-      // Session exists
-      res.status(200).json({ 
-        message: 'Session exists', 
-        username: session.username,
-        email: session.email,
-        token: session.token
-      });
-    } else {
-      // Session does not exist
-      res.status(404).json({ message: 'Session does not exist' });
-    }
-  } catch (error: any) {
-    console.error(error);
-    res.status(400).json({
-      status: 400,
-      message: error.message.toString(),
+userRoute.get('/user', (req, res) => {
+  let session = req.session as CustomSession;
+  console.log(session);
+  if (session && session.username) {
+    // User is logged in
+    res.json({
+      loggedIn: true,
+      username: session.username,
+      email: session.email
+    });
+  } else {
+    // User is not logged in
+    res.json({
+      loggedIn: false
     });
   }
 });
