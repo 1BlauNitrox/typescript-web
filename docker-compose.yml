@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  lyrotopia:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    version: '3'
+  redis:
+    image: redis:7.2.4-alpine
+    ports:
+      - "6379:6379"
+

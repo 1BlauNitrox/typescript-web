@@ -4,7 +4,7 @@ const userRoute = Router();
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-import User from '../models/User';
+import { CustomSession } from '../sessions';
 import UserRepository from '../repositories/UserRepository';
 
 userRoute.post("/register", async (req, res) => {
@@ -67,8 +67,14 @@ userRoute.post("/login", async (req, res) => {
     const token = jwt.sign(
       { id: user.id, email: user.email },
       "YOUR_SECRET",
-      { expiresIn: "1d" }
+      { expiresIn: "7d" }
     );
+
+    const session = req.session as CustomSession;
+    //session.userId = user.id;
+    session.username = user.name;
+    session.email = email;
+    session.token = token;
 
     res.status(200).json({
       status: 200,
@@ -77,6 +83,30 @@ userRoute.post("/login", async (req, res) => {
       token: token,
       user: user
     });
+  } catch (error: any) {
+    console.error(error);
+    res.status(400).json({
+      status: 400,
+      message: error.message.toString(),
+    });
+  }
+});
+
+userRoute.post("/user", async (req, res) => {
+  try {
+    const session = req.session as CustomSession;
+    if (session && session.username) {
+      // Session exists
+      res.status(200).json({ 
+        message: 'Session exists', 
+        username: session.username,
+        email: session.email,
+        token: session.token
+      });
+    } else {
+      // Session does not exist
+      res.status(404).json({ message: 'Session does not exist' });
+    }
   } catch (error: any) {
     console.error(error);
     res.status(400).json({
