@@ -1,0 +1,70 @@
+@use '../abstracts/index' as variables;
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    background-color: variables.$primary-green;
+    cursor: pointer;
+    font-size: 20px;
+
+    &:hover {
+        background-color: variables.$secondary-green;;
+    }
+
+    &:active {
+        background-color: variables.$secondary-green;;
+    }
+
+    &::after {
+
+    }
+
+    &:hover::after {
+
+    }
+}
+
+.btn-gray {
+    background-color: variables.$primary-gray !important;
+    color: #fff !important;
+
+    &:hover {
+        background-color: variables.$secondary-green;
+    }
+
+    &:active {
+        background-color: variables.$secondary-green;
+    }
+
+    &::after {
+
+    }
+
+    &:hover::after {
+
+    }
+}
+
+.btn-transparent {
+    background-color: transparent;
+    color: #fff !important;
+    border: 1px solid #fff;
+
+    &:hover {
+        background-color: variables.$secondary-green;
+    }
+
+    &:active {
+        background-color: variables.$secondary-green;
+    }
+
+    &::after {
+
+    }
+
+    &:hover::after {
+
+    }
+}

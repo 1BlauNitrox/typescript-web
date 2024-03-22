@@ -1,44 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Lyrotopia</title>
-    </head>
-    <body>
-        <h1>User Status</h1>
-        <p id="status"></p>
-        <p id="login"></p>
+<html lang="de">
 
-        <script src="../scripts/api.js"></script>
-        <script src="../scripts/user.js"></script>
-        <script>
-            const api = new ApiClient('http://localhost:8000');
-            const user = new User(api);
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-            // Call the getUserStatus method
-            user.getUserStatus()
-            .then(data => {
-                const statusElement = document.getElementById('status');
-                if (data.loggedIn) {
-                    statusElement.textContent = `Logged in as ${data.username} (${data.email})`;
-                } else {
-                    user.login("johny@example.com", "secretpassword")
-                    .then(data => {
-                        const statusElement = document.getElementById('login');
-                        statusElement.textContent = data;
-                        console.log(data);
-                    })
-                    .catch(error => {
-                        console.error('Error login User:', error);
-                        document.getElementById('login').textContent = 'Error user login';
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching user status:', error);
-                document.getElementById('status').textContent = 'Error fetching user status';
-            });
-        </script>
-    </body>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/index.css">
+    <link rel="icon" href="../images/icon.png">
+
+    <title>Lyrotopia.net | Home</title>
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body onresize="checkResize()">
+
+
+
+<!--  Fullsite Navigation  --> 
+
+<nav role="navigation" id="navigation">
+    <div class="icon-container">
+        <img src="../images/icon.png" alt="Icon" id="icon">
+        <p id="icon-title">Lyrotopia.net</p>
+    </div>
+    <ul class="nav-items">
+        <li class="nav-item" id="home"><a href="/Lyrotopia/html/index.php"><i class="fas fa-home" id="nav-icon"></i>Home</a></li>
+        <li class="nav-item" id="games"><a href="/Lyrotopia/html/spiele.php"><i class="fas fa-gamepad" id="nav-icon"></i>Spiele</a></li>
+        <li class="nav-item" id="statistics"><a href="/Lyrotopia/html/statistics.php"><i class="fas fa-chart-line" id="nav-icon"></i>Statistiken</a></li>
+        <li class="nav-item" id="status"><a href="/Lyrotopia/html/status.php"><i class="fas fa-server" id="nav-icon"></i>Status</a></li>
+        <li class="nav-item" id="team"><a href="/Lyrotopia/html/team.php"><i class="fas fa-users" id="nav-icon"></i>Team</a></li>
+        <li class="nav-item" id="support"><a href="/Lyrotopia/html/support/index.php"><i class="fas fa-question-circle" id="nav-icon"></i>Support</a></li>
+        <li class="nav-item last-nav-item" id="forum"><a href="https://forum.lyrotopia.net"><i class="fas fa-comments" id="nav-icon"></i>Forum</a></li>
+    </ul>
+</nav>
+
+<!--  Collapsed Navigation  --> 
+
+<nav role="navigation" id="navigation-collapsed" class="navigation-collapsed">
+    <img src="../images/icon.png" alt="Icon" class="nav-icon-collapsed" id="icon">
+    <hr class="nav-hr-collapsed">
+    <ul class="nav-items-collapsed">
+        <li class="nav-item-collapsed" id="home"><a href="/Lyrotopia/html/index.php"><i class="fas fa-home" id="nav-icon-collapsed"></i>Home</a></li>
+        <li class="nav-item-collapsed" id="games"><a href="/Lyrotopia/html/spiele.php"><i class="fas fa-gamepad" id="nav-icon-collapsed"></i>Spiele</a></li>
+        <li class="nav-item-collapsed" id="statistics"><a href="/Lyrotopia/html/statistics.php"><i class="fas fa-chart-line" id="nav-icon-collapsed"></i>Statistiken</a></li>
+        <li class="nav-item-collapsed" id="status"><a href="/Lyrotopia/html/status.php"><i class="fas fa-server" id="nav-icon-collapsed"></i>Status</a></li>
+        <li class="nav-item-collapsed" id="team"><a href="/Lyrotopia/html/team.php"><i class="fas fa-users" id="nav-icon-collapsed"></i>Team</a></li>
+        <li class="nav-item-collapsed" id="support"><a href="/Lyrotopia/html/index.php"><i class="fas fa-question-circle" id="nav-icon-collapsed"></i>Support</a></li>
+        <li class="nav-item-collapsed" id="forum"><a href="https://forum.lyrotopia.net"><i class="fas fa-comments" id="nav-icon-collapsed"></i>Forum</a></li>
+    </ul>
+    <ul class="nav-items-collapsed">
+        <!--<li class="nav-item" id="datenschutz"><a href="index.php"><i class="fas fa-shield-alt" id="nav-icon"></i>Datenschutz</a></li>
+        <li class="nav-item" id="imprint"><a href="index.php"><i class="fas fa-pager" id="nav-icon"></i>Impressum</a></li>
+        <li class="nav-item" id="agb"><a href="index.php"><i class="fas fa-database" id="nav-icon"></i>Agb</a></li>-->
+    </ul>
+</nav>
+
+<div class="menu" id="menu" onclick="toggle()">
+    <a id="menu-open"><i class="fa fa-bars"></i></a>
+    <a id="menu-close"><i class="fas fa-times"></i></a>
+</div>
+
+
+
+    <script src="../scripts/index.js"></script>
+    <script src="../scripts/api/api.js"></script>
+    <script src="../scripts/api/user.js"></script>
+    <script>
+        const api = new ApiClient("http://localhost:8000");
+        const user = new User(api);
+    </script>
+    <div class="content">
+
+        <div class="section header">
+            <div class="header-box">
+                <div class="header-heading">
+                    <span class="header-heading-main">Willkommen auf</span>
+                    <span class="header-heading-sub">Lyrotopia.net</span>
+                    <a class="btn btn-transparent header-button">Los geht's</a>
+                </div>
+                <!-- <a href="#about-us-anchor" id="header-button" class="header-button"></a> -->
+            </div>
+        </div>
+
+        <div id="about-us-anchor"></div>
+
+        <div class="about-us" id="about-us">
+            <h2 class="about-us-heading heading-secondary" id="about-us-heading">Erfahre mehr über uns</h2>
+            <div class="about-us-box">
+                <div class="about-us-text-box">
+                    <h3 class="about-us-sub-heading heading-tertiary">Unsere Idee</h3>
+                    <p class="about-us-sub">Seitdem wir LyroTopia am 12.03.2021 gegründet haben war es uns immer besonders wichtig ein hochwertiges und einzigartiges Spielerlebnis zu bieten.
+                        Damit das möglich ist braucht es viel Arbeit, enorme Geduld und Ideen.
+                        Dank unserem kreativen Team ist es uns gelungen das alles umzusetzen - probiere es doch aus und joine auf LyroTopia.net
+                    </p>
+
+                    <h3 class="about-us-sub-heading heading-tertiary">Unsere Spiele</h3>
+                    <p class="about-us-sub">Neben einer großzügigen Auswahl an bekannten Minigames wie FFA bieten wir auch einzigartige Spielmodi wie UnCoup oder Prison.
+                        Um mehr über den jeweiligen Modus zu erfahren klicke auf den Link unten.</p>
+
+                    <a href="Spiele.php" class="about-us-button underlined-button underlined-button-green">Mehr dazu</a>
+                </div>
+                <div class="about-us-image">
+                    <img src="../images/icon.png" alt="Bild">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="community" id="community">
+            <div class="community-box">
+                <div class="community-heading heading-secondary" id="community-heading">Unsere Community</div>
+                <div class="community-item-box">
+                    <div class="community-item">
+                        <img src="../images/teamspeak.png" alt="Teamspeak" id="community-image">
+                        <h3 class="community-item-heading">Teamspeak</h3>
+                        <p class="communit-text">Besuche unseren Teamspeak, um dich mit unserer Community zu unterhalten.</p>
+                        <a href="ts3server://lyrotopia.net" class="community-button underlined-button underlined-button-green">Verbinden</a>
+                    </div>
+                    <div class="community-item">
+                        <img src="../images/discord.png" alt="Discord" id="community-image">
+                        <h3 class="community-item-heading">Discord</h3>
+                        <p class="communit-text">Joine auf unseren Discord, um immer auf dem aktuellsten Stand des Servers zu sein.</p>
+                        <a href="https://discord.gg/lyrotopia" class="community-button underlined-button underlined-button-green" target="_blank">Beitreten</a>
+                    </div>
+                    <div class="community-item">
+                        <img src="../images/icon.png" alt="Forum" id="community-image">
+                        <h3 class="community-item-heading">Forum</h3>
+                        <p class="communit-text">Schaue in unser Forum, um dich mit unserer Community zu unterhalten.</p>
+                        <a href="https://forum.lyrotopia.net" class="community-button underlined-button underlined-button-green">Besuchen</a>
+                    </div>
+                </div>
+            </div>
+           
+            
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="scripts/cookies.js"></script>
+    <script src="scripts/scripts.js"></script>
+    <script>
+        document.getElementById('home').classList.add('active');
+
+        document.getElementById('header-button').addEventListener("click", smoothScroll);
+    </script>
+</body>
+
 </html>

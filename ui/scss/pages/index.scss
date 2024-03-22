@@ -1,0 +1,89 @@
+@use '../abstracts/index' as variables;
+
+.header {
+    text-align: center;
+    background-image: linear-gradient(to right bottom, rgba(117, 211, 117, .8), rgba(117, 211, 117, .8)), url(../../images/bg.png);
+    background-size: cover;
+    background-position: bottom;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    .header-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        .header-heading {
+            color: #fff;
+            text-transform: uppercase;
+            backface-visibility: hidden;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            .header-heading-main {
+                display: block;
+                font-size: 80px;
+                font-weight: 500;
+                letter-spacing: 5px;
+                animation: move-in-left 0.7s ease-in-out;
+            }
+
+            .header-heading-sub {
+                display: block;
+                font-size: 70px;
+                font-weight: 400;
+                letter-spacing: 15px;
+                margin-bottom: 40px;
+                animation: move-in-right 0.7s ease-in-out;
+            }
+
+            .header-button {
+                animation: move-in-bottom 0.5s 0.4s ease-in-out;
+                animation-fill-mode: backwards;
+            }
+
+            @keyframes move-in-left {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-250px);
+                }
+                80% {
+                    transform: translateX(20px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes move-in-right {
+                0% {
+                    opacity: 0;
+                    transform: translateX(250px);
+                }
+                80% {
+                    transform: translateX(-20px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes move-in-bottom {
+                0% {
+                    opacity: 0;
+                    transform: translateY(250px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+}

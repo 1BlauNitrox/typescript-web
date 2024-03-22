@@ -1,0 +1,8 @@
+@use '../abstracts/index' as variables;
+
+.section {
+    position: relative;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
+}

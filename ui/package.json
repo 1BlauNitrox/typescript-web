@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "sass": "sass --watch scss/main.scss css/main.css"
+    "sass": "sass --watch scss:css"
   },
   "dependencies": {
     "express": "^4.19.0",

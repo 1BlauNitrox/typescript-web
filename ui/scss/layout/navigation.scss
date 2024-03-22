@@ -1,0 +1,179 @@
+@use '../abstracts/index' as variables;
+
+#navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  padding: 25px 50px;
+  position: fixed;
+  transition: 0.5s ease-in-out;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  height: 70px;
+  font-size: 20px;
+  color: #fff;
+
+  &.scroll {
+    background: rgba(209, 209, 209, .9);
+  }
+
+  .icon-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #icon {
+    margin-right: 10px;
+    height: 50px;
+  }
+
+  .nav-items {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+
+    .nav-item {
+      margin: 0 30px;
+      text-decoration: none;
+      position: relative;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+
+        i {
+          margin-right: 5px;
+        }
+      }
+
+      &.active::after {
+        content: "";
+        position: absolute;
+        background: #fff;
+        height: 2px;
+        width: 100%;
+        top: 34px;
+        left: 0;
+        transition: all 0.4s ease-in-out;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        background: #fff;
+        height: 2px;
+        width: 0;
+        top: 34px;
+        left: 0;
+        transition: all 0.4s ease-in-out;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .last-nav-item {
+    margin-right: 100px;
+  }
+
+  @media screen and (max-width: 1714px) {
+    #icon-title {
+      display: none;
+    }
+
+    .nav-item {
+      margin: 0 25px;
+      text-decoration: none;
+    }
+
+    .last-nav-item {
+      margin-right: 100px;
+    }
+  }
+
+  @media screen and (max-width: 1580px) {
+    .last-nav-item {
+      margin-right: 50px;
+    }
+  }
+
+  @media screen and (max-width: 1530px) {
+    .nav-item {
+      margin: 0 20px;
+    }
+
+    .last-nav-item {
+      margin-right: 50px;
+    }
+  }
+
+  @media screen and (max-width: 1390px) {
+    .nav-items {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 486px) {
+    padding: 25px 20px;
+  }
+}
+
+// Collapsed Navigation
+.menu {
+  display: none;
+  position: fixed;
+  top: 7px;
+  right: 50px;
+  font-size: 40px;
+  z-index: 101;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+
+  a {
+    text-decoration: none;
+  }
+
+  #menu-open {
+    color: #fff;
+  }
+
+  #menu-close {
+    display: none;
+    color: red;
+  }
+}
+
+@media screen and (max-width: 1390px) {
+  #menu {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 486px) {
+  #menu {
+    right: 20px;
+  }
+}
+
+#navigation-collapsed {
+  height: 100vh;
+  width: 300px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 100px 50px 20px 50px;
+  position: fixed;
+  top: 0;
+  right: -310px;
+  transition: 0.35s ease;
+  
+}

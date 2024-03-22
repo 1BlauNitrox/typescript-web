@@ -7,7 +7,7 @@ class User {
 
     async getUserStatus() {
         try {
-        const response = await api.get('/api/auth/user');
+        const response = await api.get('/api/user');
         return response;
         } catch (error) {
         console.error('Error fetching user status:', error);
